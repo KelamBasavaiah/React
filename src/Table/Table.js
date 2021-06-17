@@ -1,11 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import useGetListCount from '../Components/customHook';
+import ReactPaginate from 'react-paginate';
+import { CSVLink } from "react-csv";
 import '../App.css';
 
 function Table() {
     const [list, setList] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [refresh, setrefresh] = useState(0);    
+    const [refresh, setrefresh] = useState(0); 
+    
+    const [offset, setOffset] = useState(0);
+    const [perPage] = useState(5);
+    const [pageCount, setPageCount] = useState(0)
+    
+  
+
     useEffect(() => {
         setLoading(false);
         fetch("https://jsonplaceholder.typicode.com/posts")
@@ -14,12 +23,18 @@ function Table() {
                 result => {
                     setList(result);
                     setLoading(true);                    
-                    console.log(result, loading);
+                    setList(result.slice(offset, offset + perPage));
+                    setPageCount(Math.ceil(result.length / perPage)); 
+                    console.log(list, loading,offset,pageCount);                     
                 }
-        )
-        return()=>{alert('Use effect Clean up Function running')}
-    }, [refresh]);
+        )                                                     
+        //return()=>{alert('Use effect Clean up Function running')}
+    }, [refresh,offset]);
 
+    const handlePageClick = (e) => {
+        const selectedPage = e.selected;
+        setOffset(selectedPage *perPage)
+    };
     let tableRows = null;
 
     if (list) {
@@ -48,8 +63,9 @@ function Table() {
     let recordCount=useGetListCount(list);
     return (
         <div>
-            <p>Records count {recordCount}</p> <p>Refreshed {refresh}</p>
+            <p>Records count {recordCount} . By custom hook.</p> <p>Refreshed {refresh}</p>
             <button onClick={()=> setrefresh(refresh+1)}>refresh</button>
+            <button><CSVLink data={list}  filename={"my-file.csv"}>Download me</CSVLink></button>
             <table id="holidayTable">
                 <thead>
                     <tr>
@@ -60,8 +76,22 @@ function Table() {
                 </thead>
                 <tbody>
                 {loading? tableRows:<tr style={spinner}><td>Data is loading ......</td></tr>}
-                </tbody>
+                </tbody>                                                                  
             </table>
+            <div  id='paginationPostion'>
+                    <ReactPaginate
+                    previousLabel={"prev"}
+                    nextLabel={"next"}
+                    breakLabel={"..."}
+                    breakClassName={"break-me"}
+                    pageCount={pageCount}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={5}
+                    onPageChange={handlePageClick}
+                    containerClassName={"pagination"}
+                    subContainerClassName={"pages pagination"}
+                    activeClassName={"active"}/>
+                    </div>
         </div>
     );
 }
