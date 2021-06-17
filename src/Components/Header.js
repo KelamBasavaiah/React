@@ -7,7 +7,7 @@ const Header = () => {
         <div className="header">
             <div className="container">
                 <div className="logo">
-                    <NavLink to="/">Hi {2+1}</NavLink>
+                    <NavLink to="/">Hi !</NavLink>
                 </div>
                 <div className="navbar">
                     <ul>
