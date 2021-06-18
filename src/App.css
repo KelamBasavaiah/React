@@ -69,8 +69,9 @@ html, body {
 
 .wrapper {
   padding: 16px;
-  margin-top: 80px;
-  height: 1500px;
+  margin-top: 40px;
+  height: auto;
+  scroll-behavior: auto;
 }
 
 #holidayTable {
@@ -129,6 +130,6 @@ html, body {
   border-radius: unset
 }
 
-#paginationPostion{
+.paginationPostion{
   float: right;
 }

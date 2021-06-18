@@ -65,7 +65,7 @@ function Table() {
         <div>
             <p>Records count {recordCount} . By custom hook.</p> <p>Refreshed {refresh}</p>
             <button onClick={()=> setrefresh(refresh+1)}>refresh</button>
-            <button><CSVLink data={list}  filename={"my-file.csv"}>Download me</CSVLink></button>
+            <button className='paginationPostion'><CSVLink data={list}  filename={"my-file.csv"}>Download me</CSVLink></button>
             <table id="holidayTable">
                 <thead>
                     <tr>
@@ -78,7 +78,7 @@ function Table() {
                 {loading? tableRows:<tr style={spinner}><td>Data is loading ......</td></tr>}
                 </tbody>                                                                  
             </table>
-            <div  id='paginationPostion'>
+            <div  className='paginationPostion'>
                     <ReactPaginate
                     previousLabel={"prev"}
                     nextLabel={"next"}
