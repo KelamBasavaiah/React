@@ -5,7 +5,7 @@ const EContext = React.createContext(3);
 function Home() {
     const [text, setText] = React.useState('');
     const [text1, setText1] = React.useState('');
-    console.log('Render:Home ');
+    //console.log('Render:Home ');
     const handleText = (event) => {setText(event.target.value);};
     const handleText1 = (event) => {setText1(event.target.value);};
 

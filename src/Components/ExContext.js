@@ -16,7 +16,7 @@ function reducer(state, action) {
 const ExContext = React.memo(({sign}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [text, setText] = React.useState('intial');
-  console.log('Render:Ex context');
+  //console.log('Render:Ex context');
   const memoizedValue = useMemo(() => text+' lol', [state,text]);
   return (
     <>

@@ -1,7 +1,8 @@
 import './App.css';
 import Header from './Components/Header';
 import Home from './Components/Home'
-import Faq from './Components/Faq'
+import Faq from './Components/Faq';
+import Gallery from './Components/Gallery';
 import React,{useState} from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Table from './Table/Table.js'
@@ -16,7 +17,7 @@ function App() {
             <Switch>
               <Route path={"/"} exact component={Home} />
               <Route path={"/Table"} exact component={Table} />
-              <Route path={"/tab"} exact component={Table} />
+              <Route path={"/Gallery"} exact component={Gallery} />
               <Route path={"/FAQ"} exact component={Faq} />
             </Switch>
           </div>
